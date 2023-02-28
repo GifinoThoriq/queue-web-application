@@ -1,0 +1,12 @@
+.container{
+    padding: 48px;
+}
+
+.container h1{
+    margin-bottom: 24px;
+}
+
+.containerCounter {
+    display: flex;
+    justify-content: space-between;
+}

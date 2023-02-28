@@ -1,14 +1,11 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router';
+import { useState } from 'react'
 import fsPromises from 'fs/promises';
 import path from 'path'
 import CardCounterCustomer from '@/component/CardCounterCustomer';
 
 export default function Home({data}) {
-
-  const router = useRouter()
 
   const [updatedData, setUpdatedData] = useState(data)
 
@@ -56,6 +53,7 @@ export default function Home({data}) {
         <div className={styles.containerCounter}>
           {updatedData.counters.map(item =>(
             <CardCounterCustomer
+              key={item.id}
               id={item.id}
               status={item.status}
               current_number={item.current_number}

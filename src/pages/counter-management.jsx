@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/Manage.module.css'
 import fsPromises from 'fs/promises';
 import path from 'path'
 import CardCounter from '@/component/CardCounter';
 
-export default function counterManagement(props){
+export default function CounterManagement(props){
 
-    const router = useRouter()
+    const router = useRouter();
 
     const changeStatusHandler = async(id) => {
         const response = await fetch('/api/change-status', {
@@ -90,6 +89,7 @@ export default function counterManagement(props){
             <div className={styles.containerCounter}>
                 {props.counters.map(item=>(
                     <CardCounter
+                        key={item.id}
                         id={item.id}
                         status={item.status}
                         onCallNext={callNextHandler}

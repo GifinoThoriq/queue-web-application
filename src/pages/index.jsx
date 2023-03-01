@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { useState } from 'react'
-import fsPromises from 'fs/promises';
+import fs from 'fs';
 import path from 'path'
 import CardCounterCustomer from '@/component/CardCounterCustomer';
 
@@ -67,13 +67,12 @@ export default function Home({data}) {
 export async function getStaticProps() {
 
   const filePath = path.join(process.cwd(),'tmp','tickets.json');
-  const jsonData = await fsPromises.readFile(filePath);
+  const jsonData = fs.readFileSync(filePath);
   const data = JSON.parse(jsonData);
 
   return {
     props: {
       data
     },
-    revalidate: 5
   }
 }

@@ -21,10 +21,8 @@ export default function Home({data}) {
     const responseJson = await response.json();
     if(status === 200)
     {
-        console.log(responseJson)
+      console.log(responseJson)
     }
-
-    window.location.reload()
   }
 
   return (

@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useState } from 'react'
-import fs from 'fs';
-import path from 'path'
+import { useState, useEffect } from 'react'
 import CardCounterCustomer from '@/component/CardCounterCustomer';
 
 export default function Home({data}) {
@@ -25,6 +23,23 @@ export default function Home({data}) {
     }
   }
 
+  useEffect(()=>{
+    async function GetData(){
+      console.log("masuk")
+      const response = await fetch('/api/get-data', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      });
+      const {status} = response;
+      const responseJson = await response.json();
+      setUpdatedData(responseJson)
+    }
+
+    GetData()
+  },[])
+
   return (
     <>
       <Head>
@@ -33,6 +48,9 @@ export default function Home({data}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {updatedData !== undefined &&
+        
+      
       <main className={styles.container}>
         <h1>Customer View</h1>
         <div className={styles.containerQueue}>
@@ -59,20 +77,21 @@ export default function Home({data}) {
           ))}
         </div>
       </main>
+    }
     </>
   )
 }
 
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-  const filePath = path.join(process.cwd(),'tmp','tickets.json');
-  const jsonData = fs.readFileSync(filePath);
-  const data = JSON.parse(jsonData);
+//   const filePath = path.join(process.cwd(),'tmp','tickets.json');
+//   const jsonData = fs.readFileSync(filePath);
+//   const data = JSON.parse(jsonData);
 
-  return {
-    props: {
-      data
-    },
-  }
-}
+//   return {
+//     props: {
+//       data
+//     },
+//   }
+// }

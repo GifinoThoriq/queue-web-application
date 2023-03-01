@@ -1,9 +1,15 @@
 .cardContainer {
-    border: 1px solid black;
     padding: 8px;
     display: flex;
     flex-direction: column;
     width: 20%;
+    background: whitesmoke;
+    color: black;
+    border-radius: 4px;
+}
+
+.cardContainer > h1 {
+    font-weight: 700;
 }
 
 .cardContainer > button {

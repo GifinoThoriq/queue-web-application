@@ -24,6 +24,7 @@ export default async function newNumber(req, res) {
                 console.log("success")
             }
         })
+        
         res.status(200).json(data)
     }
 }

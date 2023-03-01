@@ -1,6 +1,9 @@
 .cardCounter {
-    border: 1px solid black;
-    padding: 8px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 4px;
+    gap: 4px;
 }

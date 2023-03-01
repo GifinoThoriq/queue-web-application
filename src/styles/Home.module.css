@@ -25,12 +25,15 @@
 .cardQueue {
   padding: 8px;
   margin: 0 auto;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 60%;
+  width: 20%;
+  background: whitesmoke;
+  color: black;
+  height: 150px;
+  border-radius: 8px;
 }
 
 .containerCounter {

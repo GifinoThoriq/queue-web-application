@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import fsPromises from 'fs/promises';
+import path from 'path'
 import CardCounterCustomer from '@/component/CardCounterCustomer';
+import Button from '@/component/Button';
 
 export default function Home({data}) {
 
@@ -21,24 +24,8 @@ export default function Home({data}) {
     {
       console.log(responseJson)
     }
+    window.location.reload()
   }
-
-  useEffect(()=>{
-    async function GetData(){
-      console.log("masuk")
-      const response = await fetch('/api/get-data', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      });
-      const {status} = response;
-      const responseJson = await response.json();
-      setUpdatedData(responseJson)
-    }
-
-    GetData()
-  },[])
 
   return (
     <>
@@ -48,9 +35,6 @@ export default function Home({data}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {updatedData !== undefined &&
-        
-      
       <main className={styles.container}>
         <h1>Customer View</h1>
         <div className={styles.containerQueue}>
@@ -64,7 +48,7 @@ export default function Home({data}) {
         <div className={styles.cardQueue}>
           <span>Now Serving: {updatedData.current_ticket_number} </span>
           <span>Last Number: {updatedData.last_ticket_number}</span>
-          <button onClick={newNumberHandler}> Take a Number</button>
+          <Button onClick={newNumberHandler}> Take a Number</Button>
         </div>
         <div className={styles.containerCounter}>
           {updatedData.counters.map(item =>(
@@ -77,21 +61,20 @@ export default function Home({data}) {
           ))}
         </div>
       </main>
-    }
     </>
   )
 }
 
 
-// export async function getStaticProps() {
+export async function getStaticProps() {
 
-//   const filePath = path.join(process.cwd(),'tmp','tickets.json');
-//   const jsonData = fs.readFileSync(filePath);
-//   const data = JSON.parse(jsonData);
+  const filePath = path.join(process.cwd(),'tmp','tickets.json');
+  const jsonData = await fsPromises.readFile(filePath);
+  const data = JSON.parse(jsonData);
 
-//   return {
-//     props: {
-//       data
-//     },
-//   }
-// }
+  return {
+    props: {
+      data
+    },
+  }
+}

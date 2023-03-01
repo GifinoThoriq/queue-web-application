@@ -4,7 +4,7 @@ import path from 'path'
 export default async function callNext(req, res) {
 
     if(req.method === "POST") {
-        const filePath = path.join(process.cwd(),'tickets.json')
+        const filePath = path.join(process.cwd(),'tmp','tickets.json');
 
         const data = JSON.parse(fs.readFileSync(filePath))
 

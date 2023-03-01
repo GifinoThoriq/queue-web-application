@@ -23,10 +23,14 @@ export default function CounterManagement(props){
         const responseJson = await response.json();
         if(status === 200)
         {
-            console.log(responseJson)
+            alert(responseJson.message)
+            router.replace(router.asPath)
+        } else if(status !== 200){
+            alert(responseJson.message)
+            router.replace(router.asPath)
         }
 
-        router.replace(router.asPath)
+        
     }
 
     const callNextHandler = async(id) => {
@@ -105,7 +109,7 @@ export default function CounterManagement(props){
 
 export async function getStaticProps() {
 
-  const filePath = path.join(process.cwd(), 'tickets.json');
+  const filePath = path.join(process.cwd(), 'tmp' ,'tickets.json');
   const jsonData = await fsPromises.readFile(filePath);
   const objectData = JSON.parse(jsonData);
 

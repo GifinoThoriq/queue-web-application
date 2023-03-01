@@ -68,7 +68,7 @@ export default function Home({data}) {
 
 export async function getStaticProps() {
 
-  const filePath = path.join(process.cwd(), 'tickets.json');
+  const filePath = path.join(process.cwd(),'tmp','tickets.json');
   const jsonData = await fsPromises.readFile(filePath);
   const data = JSON.parse(jsonData);
 

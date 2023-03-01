@@ -17,10 +17,13 @@ export default async function newNumber(req, res) {
 
         data.waiting_queue.push(num)
         
-        fs.writeFileSync(filePath, JSON.stringify(data))
-
+        fs.writeFile(filePath, JSON.stringify(data), function(err){
+            if(err) {
+                console.log(err)
+            } else {
+                console.log("success")
+            }
+        })
         res.status(200).json(data)
-        
     }
-
 }
